@@ -36,7 +36,7 @@ function get_headline() {
     file_put_contents($headline_file, $json_a);
   }
 
-  $rand = rand(0, count($response['headline']));
+  $rand = rand(0, count($response['headline']) - 1);
   $headline = $response['headline'][$rand];
   $url = $response['url'][$rand];
 
