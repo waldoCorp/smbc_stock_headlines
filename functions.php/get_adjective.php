@@ -18,15 +18,13 @@
 
 function get_adjective() {
 
-  // First, random if it's going to be good news or bad news:
-  $bool = (bool)random_int(0,1);
-  if ($bool) {
+  require __DIR__ . '/get_market_trend.php';
+  $up = get_market_trend();
+
+  if ($up) {
     $file = __DIR__ . '/../data/adjectives-positive.txt';
-    //$adjective_file = __DIR__ . '/../data/adjectives-positive.txt';
   } else {
     $file = __DIR__ . '/../data/adjectives-negative.txt';
-    //$adjective_file = __DIR__ . '/../data/adjectives-positive.txt';
-
   }
 
   $adjective_file = new SplFileObject($file);
