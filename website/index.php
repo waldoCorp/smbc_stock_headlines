@@ -8,6 +8,12 @@
 
 <?php include("./resources.php"); ?>
 
+<style>
+body {
+  background-color: #FFF3BA;
+}
+</style>
+
 <?php
   require_once __DIR__ . '/../functions.php/get_headline.php';
   require_once __DIR__ . '/../functions.php/get_adjective.php';
