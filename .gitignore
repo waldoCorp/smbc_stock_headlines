@@ -1,2 +1,7 @@
 keys.php
 data/headline.json
+data/market.json
+test.*
+functions.php/test.*
+.*
+~*
