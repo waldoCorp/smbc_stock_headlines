@@ -1,4 +1,4 @@
-7
+15
 drops
 plummets
 implodes
@@ -6,3 +6,11 @@ tanks
 shrinks
 contracts
 deflates
+craters
+falls
+dives
+collapses
+nose-dives
+plunges
+tumbles
+retreats

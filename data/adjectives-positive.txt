@@ -1,4 +1,4 @@
-9
+15
 soars
 rises
 erupts
@@ -8,3 +8,9 @@ grows
 inflates
 burgeons
 ascends
+balloons
+mushrooms
+spikes
+climbs
+blasts off
+skyrockets
