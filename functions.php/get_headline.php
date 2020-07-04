@@ -35,37 +35,42 @@ function get_headline() {
     $json_a = json_encode($json_a);
     file_put_contents($headline_file, $json_a);
   }
-  return $response;
+
+  $rand = rand(0, count($response['headline']));
+  $headline = $response['headline'][$rand];
+  $url = $response['url'][$rand];
+
+  return array('headline' => $headline,
+               'url' => $url);
 }
 
 
 
 // Function to request headlines, not externally used
-// returns a single random headline array: array('headline'=>...,'url'=>...);
+// returns a 2*n array of headlines and urls
 function request_headline() {
-    require __DIR__ . '/../keys.php'; // Load our api key in $api_key
+    require __DIR__ . '/../keys.php'; // Load our api key in $news_api
     // Set up cURL request:
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://newsapi.org/v2/top-headlines?country=us"); // add &pageSize=NUMBER to limit number of results (100 is max), 20 is default
+    curl_setopt($ch, CURLOPT_URL, "https://newsapi.org/v2/top-headlines?country=us&pageSize=100"); // add &pageSize=NUMBER to limit number of results (100 is max), 20 is default
     $headers = [
-      'X-Api-Key:' . $api_key
+      'X-Api-Key:' . $news_api
     ];
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true); // Only return the body text of the request, ignore if it was successful or not (as a return value)
     $results = json_decode(curl_exec($ch),true); // Default is 20 results
     curl_close($ch);
 
-    // Now we need to pick one at random:
-    $rand = rand(0,19);
-    $url = $results['articles'][$rand]['url'];
-    $headline = $results['articles'][$rand]['title'];
+    // Pull out the headlines and urls
+    $articles = array ();
+    $i = 0;
 
-    // Strip off ending hyphen and news org info. This might break some headlines that actually use hyphens...
-    $pos = strrpos($headline, '-');
-    if (!is_null($pos)) {
-      $headline = substr($headline, 0, $pos-1);
+    foreach ($results['articles'] as $res) {
+      $articles['headline'][$i] = $res['title'];
+      $articles['url'][$i] = $res['url'];
+
+      $i++;
     }
 
-    return array('headline'=>$headline,'url'=>$url);
-
+    return $articles;
 }

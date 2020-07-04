@@ -43,15 +43,6 @@
   <div class="row justify-content-center">
     <h1><?php echo htmlspecialchars($headline); ?></h1>
   </div>
-  <br>
-  <div class="row justify-content-center">
-    <?php if ($pos) { ?>
-      <img src="./images/positive-market.png">
-    <?php } else { ?>
-      <img src="./images/negative-market.png">
-    <?php } ?>
-  </div>
-  <br>
   <div class="row justify-content-center">
     <span class="text-muted">
       (<a href="<?php echo htmlspecialchars($url); ?>">link to article</a>)
@@ -66,7 +57,7 @@
     <span class="text-muted">
       Find a bug? Want a new feature? <a href="mailto:contact@waldocorp.com">Drop us a line!</a>
       | <a href="https://waldocorp.com">Other Projects</a>
-      | <a href="https://github.com/waldoCorp/stock_market">Github Page</a>
+      | <a href="https://github.com/waldoCorp/smbc_stock_headlines">Github Page</a>
       | <a href="https://www.smbc-comics.com/comic/markets">Inspiration</a>
     </span>
   </div>
