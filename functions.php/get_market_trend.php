@@ -22,7 +22,7 @@ function get_market_trend() {
   $market_file = __DIR__ . '/../data/market.json';
   $json = file_get_contents($market_file);
   $json_a = json_decode($json,true);
-  $time_created = strtotime($json_a['time_created'] . ' +1 seconds');
+  $time_created = strtotime($json_a['time_created'] . ' +1 hours');
 
   $response = $json_a['positive'];
 
