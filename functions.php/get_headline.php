@@ -1,4 +1,22 @@
 <?php
+/**
+ *    Copyright (c) 2020 Ben Cerjan, Lief Esbenshade
+ *
+ *    This file is part of smbc_stocks.
+ *
+ *    smbc_stocks is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU Affero General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    smbc_stocks is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU Affero General Public License for more details.
+ *
+ *    You should have received a copy of the GNU Affero General Public License
+ *    along with smbc_stocks.  If not, see <https://www.gnu.org/licenses/>.
+**/
 
 /**
  * Function to make a call to the newsapi.org API to get a random headline for
@@ -23,10 +41,9 @@ function get_headline() {
   $json = file_get_contents($headline_file);
   $json_a = json_decode($json,true);
   $time_created = strtotime($json_a['time_created'] . ' +1 hours');
+  $response = null;
 
-  $response = array('headline'=>$json_a['headline'],'url'=>$json_a['url']);
   if ($time_created < time()) {
-
     // Old headline, need a new one
     $response = request_headline();
     // Now stuff it in our file along with current time and date:
@@ -34,6 +51,8 @@ function get_headline() {
     $json_a['time_created'] = date("Y-m-d H:i:s");
     $json_a = json_encode($json_a);
     file_put_contents($headline_file, $json_a);
+  } else {
+    $response = array('headline'=>$json_a['headline'],'url'=>$json_a['url']);
   }
 
   $rand = rand(0, count($response['headline']) - 1);
@@ -58,9 +77,9 @@ function request_headline() {
     ];
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true); // Only return the body text of the request, ignore if it was successful or not (as a return value)
+    curl_setopt ($ch, CURLOPT_USERAGENT, "waldocorp dev");
     $results = json_decode(curl_exec($ch),true); // Default is 20 results
     curl_close($ch);
-
     // Pull out the headlines and urls
     $articles = array ();
     $i = 0;
