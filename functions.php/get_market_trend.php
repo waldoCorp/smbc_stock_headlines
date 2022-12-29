@@ -1,4 +1,22 @@
 <?php
+/**
+ *    Copyright (c) 2020 Ben Cerjan, Lief Esbenshade
+ *
+ *    This file is part of smbc_stocks.
+ *
+ *    smbc_stocks is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU Affero General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    smbc_stocks is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU Affero General Public License for more details.
+ *
+ *    You should have received a copy of the GNU Affero General Public License
+ *    along with smbc_stocks.  If not, see <https://www.gnu.org/licenses/>.
+**/
 
 /**
  * Function to make a call to the finnhub.io API to determine if stocks are
@@ -54,7 +72,6 @@ function request_market() {
     curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true); // Only return the body text of the request, ignore if it was successful or not (as a return value)
     $results = json_decode(curl_exec($ch),true);
     curl_close($ch);
-
     // Now decide if it went up or down:
     $up = false;
     if ($results['c'] > $results['pc']) {
