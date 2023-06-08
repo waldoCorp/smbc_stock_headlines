@@ -1,1 +1,1 @@
-Heeding Zach Weinersmith's [call to action](https://www.smbc-comics.com/comic/markets) we've created the [Financial Headline Generator!](https://www.stocks.waldocorp.com)
+Heeding Zach Weinersmith's [call to action](https://www.smbc-comics.com/comic/markets) we've created the [Financial Headline Generator!](https://stocks.waldocorp.com)
